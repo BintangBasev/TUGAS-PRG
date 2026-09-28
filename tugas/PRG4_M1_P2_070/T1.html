@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Suhu</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 350px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+
+        #hasil {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            background: #4a08ff;
+            color: #f5f2f2;
+            display: none;
+        }
+        #hasil:not(:empty) {
+            display: block;
+            animation: muncul 0.4s ease;
+        }
+
+        @keyframes muncul {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+        </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>🌡️ Konversi Suhu</h1>
+
+        <label for="suhu">Masukkan Suhu:</label>
+        <input type="number" id="suhu" placeholder="Contoh: 30">
+
+        <label>Pilih Konversi:</label>
+        <select id="konversi">
+            <option disabled selected>Pilih Suhu</option>
+            <option value="Ckf">Celsius ke Fahrenheit</option>
+            <option value="CkR">Celsius ke Reamur</option>
+            <option value="FkC">Fahrenheit ke Celsius</option>
+            <option value="FkR">Fahrenheit ke Reamur</option>
+            <option value="RkC">Reamur ke Celsius</option>
+            <option value="RkF">Reamur ke Fahrenheit</option>
+        </select>
+
+        <button onclick="konversiSuhu()">Konversi</button>
+
+        <p id="hasil"></p>
+    </div>
+
+    <script src="T1.js"></script>
+
+</body>
+</html>
