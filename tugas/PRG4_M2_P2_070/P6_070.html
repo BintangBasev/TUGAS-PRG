@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,90 +10,86 @@
             text-decoration: line-through;
             color: gray;
         }
+
         button {
-            margin-left: 10px
+            margin-left: 10px;
         }
     </style>
 </head>
 <body>
     <h1>Daftar Tugas - P6_070</h1>
-    <!----Form untuk menambah tugas-->
-    <input type="text" id="InputTugas" placeholder="Masukkan tugas">
-    <button onclick="tambahTugas()">Tambah Tugas</button>
 
-    <!---tombol untuk menampilkan dafta tugas-->
+    <input type="text" id="inputTugas" placeholder="Masukkan tugas">
+    <button onclick="tambahTugas()">Tambah Tugas</button>
     <button onclick="tampilkanTugas()">Tampilkan Daftar Tugas</button>
 
-    <!---daftar tugas -->
     <ul id="listTugas" style="display: none;"></ul>
 
     <script>
-        //deklarasi array untuk menyimpan tugas
+        // Array untuk menyimpan daftar tugas
         let daftarTugas = [];
 
+        // Fungsi untuk menambah tugas
         function tambahTugas() {
-            const input = document.getElementById('InputTugas');
-            const tugas = input.value.trim(); //menghapus spasi berlebih di awal/akhir input
+            const input = document.getElementById('inputTugas');
+            const teks = input.value.trim();
 
-            if (tugas) { //memastikan input tidak kosong
-                daftarTugas.push(tugas); //menambahkan tugas ke dalam array
-                console.log(`Tugas "${tugas}" berhasil ditambahkan.`);
-                input.value = ''; //membersihkan input setelah menambah tugas
-                alert(`Tugas "${tugas}" berhasil ditambahkan.`); //menampilkan notifikasi berhasil
-            } else {
-                alert('Masukkan tugas yang valid.'); //peringatan jika input kosong
+            if (teks !== '') {
+                daftarTugas.push({ text: teks, completed: false });
+                input.value = '';
             }
         }
 
+        // Fungsi untuk menghapus tugas
+        function hapusTugas(index) {
+            daftarTugas.splice(index, 1);
+            tampilkanTugas();
+        }
+
+        // Fungsi untuk menampilkan daftar tugas
         function tampilkanTugas() {
             const list = document.getElementById('listTugas');
-            list.innerHTML = ''; //membersihkan daftar sebelum ditampilkan
+            list.innerHTML = ''; // Membersihkan daftar sebelum ditampilkan
 
             if (daftarTugas.length === 0) {
-                list.innerHTML = '<li>Tidak ada tugas .</li>'; // menampilkan pesan jika tidak ada tugas
+                list.innerHTML = '<li>Tidak ada tugas.</li>'; // Menampilkan pesan jika tidak ada tugas
             } else {
                 daftarTugas.forEach((tugas, index) => {
-                    //membuat elemen list untuk setiap tugas
+                    // Membuat elemen list untuk setiap tugas
                     const li = document.createElement('li');
                     const checkbox = document.createElement('input');
                     checkbox.type = 'checkbox';
-                    checkbox.checked = tugas.completed;
-                    checkbox.onchange = () => tandaiSelesai(index);
+                    checkbox.checked = tugas.completed; // Menentukan apakah checkbox dicentang atau tidak
+                    checkbox.onchange = () => tandaiSelesai(index); // Menambahkan fungsi tandai selesai pada checkbox
 
                     const span = document.createElement('span');
-                    span.textContent = tugas.text;
-                    if (tugas.completed) { 
-                        span.classlist.add('completed');
+                    span.textContent = tugas.text; // Menampilkan teks tugas
+                    if (tugas.completed) {
+                        span.classList.add('completed'); // Menandai tugas selesai
                     }
 
                     const btnHapus = document.createElement('button');
                     btnHapus.textContent = 'Hapus';
-                    btnHapus.style.marginLeft = '10px';
-                    btnHapus.onclick = () => hapusTugas(index);
+                    btnHapus.style.marginLeft = '10px'; // Menambahkan margin kiri langsung pada tombol
+                    btnHapus.onclick = () => hapusTugas(index); // Menambahkan fungsi hapus pada tombol
 
-                    li.appendChild(checkbox);
-                    li.appendChild(span);
-                    li.appendChild(btnHapus);
+                    li.appendChild(checkbox); // Menambahkan checkbox ke elemen li
+                    li.appendChild(span); // Menambahkan teks tugas ke elemen li
+                    li.appendChild(btnHapus); // Menambahkan tombol hapus ke elemen li
 
-                    list.appendChild(li);
+                    list.appendChild(li); // Menambahkan tugas ke daftar
                 });
             }
 
-            //tampilkan daftar hanya saat tombol ditekan
+            // Tampilkan daftar hanya saat tombol ditekan
             list.style.display = 'block';
         }
 
-        function hapusTugas(indeks) {
-            if (indeks > 0 && indeks <= daftarTugas.length) {
-                const tugasTerhapus = daftarTugas.splice(indeks -1, 1);
-                console.log(`Tugas "${tugasTerhapus}" berhasil dihapus.`);
-                alert(`Tugas "${tugasTerhapus}" berhasil dihapus.`);
-                tampilkanTugas(); //memperbarui tampilan setelah penghapusan
-            } else {
-                alert('Indeks tugas tidak valid.'); //peringatan jika indeks tidak valid
-            }
+        // Fungsi untuk menandai tugas sebagai selesai atau belum selesai
+        function tandaiSelesai(index) {
+            daftarTugas[index].completed = !daftarTugas[index].completed;
+            tampilkanTugas(); // Memperbarui tampilan setelah perubahan status
         }
     </script>
-
 </body>
 </html>
