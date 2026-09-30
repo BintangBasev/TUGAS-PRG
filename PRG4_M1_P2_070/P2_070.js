@@ -30,7 +30,7 @@ document.getElementById('formUsia').addEventListener('submit', function (event) 
     if(usia < 0){
         document.getElementById('hasil').innerText = "Tahun lahir lebih besar dari tahun sekarang!";
     } else if(usia > 1 ||usia < 1800){
-        document.getElementById('hasil').innerText = "lu udah mati begoo tolol";
+        document.getElementById('hasil').innerText = "Usia yang dihitung tidak masuk akal!";
     }
     else {
         //menampilkan hasil usia
