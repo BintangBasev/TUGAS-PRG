@@ -29,8 +29,8 @@ document.getElementById('formUsia').addEventListener('submit', function (event) 
     //validasi apakah usia masuk akal
     if(usia < 0){
         document.getElementById('hasil').innerText = "Tahun lahir lebih besar dari tahun sekarang!";
-    } else if(usia > 1 ||usia < 1800){
-        document.getElementById('hasil').innerText = "Usia yang dihitung tidak masuk akal!";
+    } else if(tahunLahir < 1800){
+        document.getElementById('hasil').innerText = "Usia tidak masuk akal!";
     }
     else {
         //menampilkan hasil usia
